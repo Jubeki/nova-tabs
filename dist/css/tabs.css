@@ -1,1 +1,3 @@
-.tab-content [dusk=attach-button],.tab-content [dusk=create-button]{margin-top:1.5rem}
+.tab-content [dusk=create-button], .tab-content [dusk=attach-button] {
+  margin-top: 1.5rem;
+}

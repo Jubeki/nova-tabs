@@ -17,8 +17,7 @@
             </div>
             <div
                     :class="[(panel && panel.defaultSearch) ? 'default-search': 'tab-content']"
-                    v-for="(tab, index) in tabs"
-                    v-if="tab.init"
+                    v-for="(tab, index) in availableTabs"
                     v-show="tab.name == activeTab"
                     :label="tab.name"
                     :key="'related-tabs-fields' + index"
@@ -42,7 +41,7 @@
 </template>
 
 <script>
-    import BehavesAsPanel from 'laravel-nova/src/mixins/BehavesAsPanel'
+    import BehavesAsPanel from '../../../vendor/laravel/nova/resources/js/mixins/BehavesAsPanel.js'
 
     export default {
         mixins: [BehavesAsPanel],
@@ -87,6 +86,14 @@
             componentName(field) {
                 return field.prefixComponent ? 'detail-' + field.component : field.component
             }
+        },
+
+        computed: {
+
+            availableTabs() {
+                return this.tabs.filter((tab) => tab.init)
+            }
+
         }
     };
 </script>

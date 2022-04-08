@@ -17,6 +17,14 @@ class Tabs extends Panel
     public $hideLabel = false;
 
     /**
+     * The panel's component.
+     *
+     * @var string
+     */
+    public $component = 'dkulyk-tabs';
+    
+
+    /**
      * Prepare the given fields.
      *
      * @param  \Closure|array $fields
@@ -25,6 +33,7 @@ class Tabs extends Panel
     protected function prepareFields($fields)
     {
         collect(is_callable($fields) ? $fields() : $fields)->each(function ($fields, $key) {
+
             if (is_string($key) && is_array($fields)) {
                 $fields = new Panel($key, $fields);
             }
@@ -119,12 +128,11 @@ class Tabs extends Panel
     /**
      * Prepare the panel for JSON serialization.
      *
-     * @return array
+     * @return array<string, mixed>
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return array_merge(parent::jsonSerialize(), [
-            'component' => 'dkulyk-tabs',
             'defaultSearch' => $this->defaultSearch,
             'hideLabel' => $this->hideLabel,
         ]);
